@@ -1,6 +1,6 @@
 # RAG-Chatbot
 
-This ia a RAG Chatbot app that can answer questions related to the book `The War of the Worlds`.
+This ia a RAG Chatbot app that can answer various questions. It retrieves the necessary information from Wikipedia.
 
 ### How to run the app
 To run the hosted Streamlit app, go to this link: https://llm-rag-chatbot.streamlit.app/
