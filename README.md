@@ -3,8 +3,6 @@
 This ia a RAG Chatbot app that can answer questions related to the book `The War of the Worlds`.
 
 ### How to run the app
-To run the hosted Streamlit app, go to this link: https://llm-rag-chatbot.streamlit.app/
-
 To run the Streamlit app locally, follow these instructions:
 
 1. Install Python - You need a python 3.x installation.
