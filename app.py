@@ -7,50 +7,35 @@ import streamlit as st
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
-from langchain_community.vectorstores import FAISS
+from langchain_community.retrievers import WikipediaRetriever
 from langchain_community.chat_models import ChatCohere
-from langchain_community.embeddings import HuggingFaceInferenceAPIEmbeddings
 
 dotenv.load_dotenv()
 
 
 @st.cache_resource
-def load_models():
-    """Loads and caches the embedding and chat models in streamlit."""
+def load_model():
+    """Loads and caches the chat model in streamlit."""
 
-    embedding_model = HuggingFaceInferenceAPIEmbeddings(api_key=os.getenv("HUGGINGFACE_API_KEY"))
     chat_model = ChatCohere(cohere_api_key=os.getenv("COHERE_API_KEY"))
-    return embedding_model, chat_model
+    return chat_model
 
 
 # Initialization
-embedding_model, chat_model = load_models()
+retriever = WikipediaRetriever()
+chat_model = load_model()
 output_parser = StrOutputParser()
 if "chat_history" not in st.session_state:
     st.session_state["chat_history"] = []
 
 
-@st.cache_resource
-def load_vectorstore():
-    """Loads a saved vectorstore and caches to streamlit."""
-
-    vectorstore = FAISS.load_local("faiss_vectorstore",
-                                   embedding_model,
-                                   allow_dangerous_deserialization=True)
-    return vectorstore
-
-
-vectorstore = load_vectorstore()
-
-
 def rag_chatbot(question):
-    """Takes in a user's question, retrieves necessary context from a vectorstore,
+    """Takes in a user's question, retrieves necessary context from Wikipedia,
     inputs the question and the context as a prompt into an LLM, and outputs the response."""
 
     prompt = ChatPromptTemplate.from_template("""
-    You are a helpful assistant who answers questions related to the book "The War of the Worlds".
-    Do not answer other types of questions.
     Answer the question based only on the provided context.
+    Do not answer inappropriate questions.
 
     Context:
     {context}
@@ -59,8 +44,6 @@ def rag_chatbot(question):
     {question}
     """)
 
-    retriever = vectorstore.as_retriever(search_type="similarity_score_threshold",
-                                         search_kwargs={"score_threshold": 0.2})
     qa_chain = (
             {"context": retriever, "question": RunnablePassthrough()}
             | prompt
@@ -72,10 +55,11 @@ def rag_chatbot(question):
 
 
 # Streamlit
-st.title("Book Q&A RAG Chatbot")
+st.title("Wikipedia Q&A RAG Chatbot")
 
 with st.container(height=113, border=True):
-    st.write(""":green[This is a RAG Chatbot app that can answer questions related to the book "The War of the Worlds".
+    st.write(""":green[This is a RAG Chatbot app that can answer various questions. 
+    It uses Wikipedia to retrieve relevant information.
     The app cannot recognize the context from previous questions.
     So ensure that each question makes sense on its own.
     The Chatbot may sometimes hallucinate and give wrong answers.]""")
