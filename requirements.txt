@@ -1,8 +1,6 @@
-unstructured
-python-dotenv
-faiss-cpu
 cohere
+python-dotenv
 langchain-core
 langchain-community
-langchain-text-splitters
 streamlit
+wikipedia
