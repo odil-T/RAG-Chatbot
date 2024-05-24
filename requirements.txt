@@ -2,5 +2,6 @@ cohere
 python-dotenv
 langchain-core
 langchain-community
+langchain-cohere
 streamlit
 wikipedia
