@@ -1,7 +1,7 @@
 cohere==5.5.3
 python-dotenv==1.0.1
 langchain-core==0.2.1
-langchain-community==0.0.33
+langchain-community==0.2.1
 langchain-cohere==0.1.5
 streamlit==1.35.0
 wikipedia==1.4.0
