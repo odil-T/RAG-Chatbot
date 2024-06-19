@@ -1,7 +1,5 @@
 # RAG-Chatbot
 
-![del](https://github.com/odil-T/RAG-Chatbot/assets/142138394/a56e6772-49da-42d9-8b0a-ad78111b1eb5)
-
 This ia a RAG Chatbot app that can answer various questions. It retrieves the necessary information from Wikipedia.
 
 ### How to run the app
@@ -17,3 +15,5 @@ To run the Streamlit app locally, follow these instructions:
 7. Save API Key - To let the app access the API key, you will need to make a new file in your working directory called `.env`. Open the file and write `COHERE_API_KEY=`. Enter your API key after the `=` sign without leaving spaces. Save the file.
 8. Run The App - You can launch the application by running `streamlit run app.py`. This launches the Streamlit app locally. A new window should appear in your browser.
 9. You can close the app by closing the terminal/command prompt. If you wish to reopen it, open the terminal/command prompt in `RAG-Chatbot` directory and run `chat_app\Scripts\activate`, followed by `streamlit run app.py`. 
+
+![del](https://github.com/odil-T/RAG-Chatbot/assets/142138394/a56e6772-49da-42d9-8b0a-ad78111b1eb5)
