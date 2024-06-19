@@ -1,5 +1,7 @@
 # RAG-Chatbot
 
+![del](https://github.com/odil-T/RAG-Chatbot/assets/142138394/a56e6772-49da-42d9-8b0a-ad78111b1eb5)
+
 This ia a RAG Chatbot app that can answer various questions. It retrieves the necessary information from Wikipedia.
 
 ### How to run the app
